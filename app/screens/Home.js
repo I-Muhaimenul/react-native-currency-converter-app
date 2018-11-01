@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StatusBar, KeyboardAvoidingView } from 'react-native';
 
 import { Container } from '../components/Container';
@@ -7,6 +8,8 @@ import { InputWithButton } from '../components/TextInput';
 import { ClearButton } from '../components/Buttons';
 import { LastConverted } from '../components/Text';
 import { Header } from '../components/Header';
+
+import { swapCurrency, changeCurrencyAmount } from '../actions/currencies';
 
 const TEMP_BASE_CURRENCY = 'USD';
 const TEMP_QUOTE_CURRENCY = 'GBP';
@@ -17,20 +20,31 @@ const TEMP_CONVERSION_DATE = new Date();
 
 // export default () => ();
 class Home extends Component {
+    static propTypes = {
+        navigation: PropTypes.object,
+    };
+
     handlePressBaseCurrency = () => {
         console.log('press base');
+        this.props.navigation.navigate('CurrencyList', { title: 'Base Currency'});
     };
     handlePressQuoteCurrency = () => {
         console.log('press quote');
+        this.props.navigation.navigate('CurrencyList', { title: 'Quote Currency'});
     };
     handleTextChange = (text) => {
         console.log('change text', text);
+
+        console.log(changeCurrencyAmount(text));
     };
     handleSwapCurrency = () => {
         console.log('swap text');
+        // this.props.dispatch(swapCurrency());
+        console.log(swapCurrency());
     };
     handleOptionPress = () => {
         console.log('option pressed');
+        this.props.navigation.navigate('Options');
     };
     // render is for display the output
     render () {
