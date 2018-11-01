@@ -34,7 +34,7 @@ class Home extends Component {
     };
     handleTextChange = (text) => {
         console.log('change text', text);
-
+        //this need to call from dispatch
         console.log(changeCurrencyAmount(text));
     };
     handleSwapCurrency = () => {
