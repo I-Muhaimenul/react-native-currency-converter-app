@@ -32,7 +32,8 @@ class Home extends Component {
         amount: PropTypes.number,
         conversionRate: PropTypes.number,
         isFetching: PropTypes.bool,
-        lastConvertedDate: PropTypes.object
+        lastConvertedDate: PropTypes.object,
+        primaryColor: PropTypes.string,
     };
 
     handlePressBaseCurrency = () => {
@@ -66,23 +67,25 @@ class Home extends Component {
 
 
         return (
-            <Container>
+            <Container backgrounColor={this.props.primaryColor}>
                 <StatusBar translucent={false} barStyle="light-content"></StatusBar>
                 <Header onPress={this.handleOptionPress}/>
                 <KeyboardAvoidingView behavior="padding">
-                    <Logo />
+                    <Logo tintColor={this.props.primaryColor}/>
                     <InputWithButton
                         buttonText={TEMP_BASE_CURRENCY} 
                         onPress={this.handlePressBaseCurrency} 
                         defaultValue={TEMP_BASE_PRICE} 
                         keyboardType="numeric" 
-                        onChangeText={this.handleTextChange}
+                        onChangeText={this.handleTextChange} 
+                        textColor={this.props.primaryColor}
                     />
                     <InputWithButton 
                         buttonText={TEMP_QUOTE_CURRENCY}
                         onPress={this.handlePressQuoteCurrency}
                         editable={false} 
-                        value={TEMP_QUOTE_PRICE}
+                        value={TEMP_QUOTE_PRICE} 
+                        textColor={this.props.primaryColor}
                     />
                     <LastConverted 
                     base={TEMP_BASE_CURRENCY} 
@@ -110,13 +113,16 @@ const mapStateToProps = (state) => {
     const conversionRate = rates[quoteCurrency] || 0;
     const isFetching = conversionSelector.isFetching;
     const lastConvertedDate = conversionSelector.date ? new Date(conversionSelector.date) : new Date();
+    const primaryColor= state.themes.primaryColor;
+
     return {
         baseCurrency,
         quoteCurrency,
         amount,
         conversionRate,
         isFetching,
-        lastConvertedDate
+        lastConvertedDate,
+        primaryColor
     };
 };
 

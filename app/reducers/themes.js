@@ -1,4 +1,4 @@
-import { CHANGE_PRIMARY_COLOR } from '../actions/theme';
+import { CHANGE_PRIMARY_COLOR } from '../actions/themes';
 
 const initialState = {
   primaryColor: '#4F6D7A',
