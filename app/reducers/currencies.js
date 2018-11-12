@@ -1,7 +1,11 @@
 import { CHANGE_CURRENCY_AMOUNT, 
     SWAP_CURRENCY, 
     CHANGE_BASE_CURRENCY, 
-    CHANGE_QUOTE_CURRENCY } from '../actions/currencies';
+    CHANGE_QUOTE_CURRENCY,
+    GET_INITIAL_CONVERSION,
+    CONVERSION_RESULT,
+    CONVERSION_ERROR
+ } from '../actions/currencies';
 
 const setConversion = (state, action) => {
     let conversion = {
@@ -96,6 +100,28 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 quoteCurrency: action.currency,
                 conversions: setConversion(state, action)
+            };
+        case GET_INITIAL_CONVERSION:
+        return {
+            ...state,
+            conversions: setConversion(state, {currency: state.baseCurrency})
+        };
+        case CONVERSION_RESULT:
+        return {
+            ...state,
+            baseCurrency: action.result.base,
+            conversions: {
+                ...state.conversions,
+                [action.result.base]: {
+                    isFetching: false,
+                    ...action.result
+                }
+            }
+        };
+        case CONVERSION_ERROR:
+            return {
+                ...state,
+                error: action.error
             };
         default: return state
     }

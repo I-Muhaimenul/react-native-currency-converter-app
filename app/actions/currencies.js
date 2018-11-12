@@ -6,6 +6,10 @@ export const CHANGE_QUOTE_CURRENCY = 'CHANGE_QUOTE_CURRENCY';
 
 export const GET_INITIAL_CONVERSION = 'GET_INITIAL_CONVERSION';
 
+//redux saga
+export const CONVERSION_RESULT = 'CONVERSION_RESULT';
+export const CONVERSION_ERROR = 'CONVERSION_ERROR';
+
 export const swapCurrency = () => ({
     type: SWAP_CURRENCY,
 });
