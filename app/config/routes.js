@@ -6,6 +6,8 @@ import CurrencyList from '../screens/CurrencyList';
 import Options from '../screens/Options';
 import Themes from '../screens/Themes';
 
+// need to wrap the root componenet to navigate through routes
+
 const Homstack = createStackNavigator({
     Home: {
         screen: Home,
